@@ -1,5 +1,5 @@
 apiVersion: v2
 name: basic-web-app
-description: A Helm chart for a generic web application
+description: a generic helm chart to run basic web applications in kubernertes
 type: application
 version: 1.0.0
