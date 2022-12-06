@@ -1,6 +1,6 @@
 # basic-web-app
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a generic helm chart to run basic web applications in kubernertes
 
@@ -9,6 +9,10 @@ a generic helm chart to run basic web applications in kubernertes
 ```
 docker run --rm -v $(pwd):/app -w/app jnorwood/helm-docs -t helm-docs-template.gotmpl
 ```
+
+## Source Code
+
+* <https://github.com/itsmethemojo/helm-basic-web-app>
 
 ## Values
 
@@ -20,7 +24,8 @@ docker run --rm -v $(pwd):/app -w/app jnorwood/helm-docs -t helm-docs-template.g
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | containerPort | int | `80` |  |
-| env | object | `{}` |  |
+| env | object | `{}` | environment variables passed trough to the pod, will be stored as secret |
+| envFromExternalSecret | object | `{}` | reference multiple environment variables from external secrets |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `""` |  |
@@ -38,6 +43,7 @@ docker run --rm -v $(pwd):/app -w/app jnorwood/helm-docs -t helm-docs-template.g
 | livenessProbe.httpGet.port | string | `"http"` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
+| persistentVolumeClaims | list | `[]` | define multiple persistent volume claims with mountpath to be created |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | readinessProbe.httpGet.path | string | `"/"` |  |

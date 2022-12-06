@@ -1,0 +1,10 @@
+{{- range .Values.persistentVolumeClaims }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "basic-web-app.fullname" $ }}-{{ .name }}
+  annotations:
+spec:
+  {{- toYaml .spec | nindent 2 }}
+---
+{{- end }}

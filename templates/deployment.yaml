@@ -43,9 +43,8 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.env }}
           env:
-            {{- range $key, $val := . }}
+            {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:
@@ -53,7 +52,22 @@ spec:
                   key: {{ $key }}
                   optional: false
             {{- end }}
+            {{- range .Values.envFromExternalSecret }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .secret }}
+                  key: {{ .key }}
+                  optional: false
+            {{- end }}
+          {{- with .Values.persistentVolumeClaims }}
+          volumeMounts:
+            {{- range . }}
+            - mountPath: {{ .mountPath }}
+              name: {{ include "basic-web-app.fullname" $ }}-{{ .name }}
+            {{- end }}
           {{- end }}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -65,4 +79,12 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.persistentVolumeClaims }}
+      volumes:
+        {{- range . }}
+        - name: {{ include "basic-web-app.fullname" $ }}-{{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ include "basic-web-app.fullname" $ }}-{{ .name }}
+        {{- end }}
       {{- end }}
