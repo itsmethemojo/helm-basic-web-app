@@ -36,9 +36,16 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+# -- environment variables passed trough to the pod, will be stored as secret
 env: {}
   # Specify multiple environment parameters for the container
   # EXAMPLE_KEY: example-value
+
+# -- reference multiple environment variables from external secrets
+envFromExternalSecret: {}
+#  - name: EXAMPLE_ENV_VAR
+#    secret: my-external-secret
+#    key: example-key-in-secret
 
 podAnnotations: {}
 
@@ -97,3 +104,15 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# -- define multiple persistent volume claims with mountpath to be created
+persistentVolumeClaims: []
+#  - name: example-1
+#    mountPath: /data/example-one
+#    spec:
+#      storageClassName: local-path
+#      accessModes:
+#        - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: 1Gi
