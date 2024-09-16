@@ -48,7 +48,7 @@ spec:
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "basic-web-app.fullname" $ }}-env
+                  name: {{ include "basic-web-app.fullname" $ }}-env-vars
                   key: {{ $key }}
                   optional: false
             {{- end }}
