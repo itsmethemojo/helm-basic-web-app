@@ -17,6 +17,8 @@ fullnameOverride: ""
 
 containerPort: 80
 
+command: []
+
 livenessProbe:
   httpGet:
     path: /
@@ -26,6 +28,8 @@ readinessProbe:
   httpGet:
     path: /
     port: http
+
+startupProbe: null
 
 serviceAccount:
   # Specifies whether a service account should be created
