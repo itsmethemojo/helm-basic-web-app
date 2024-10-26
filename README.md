@@ -1,6 +1,6 @@
 # basic-web-app
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a generic helm chart to run basic web applications in kubernertes
 
@@ -23,6 +23,7 @@ docker run --rm -v $(pwd):/app -w/app jnorwood/helm-docs -t helm-docs-template.g
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| command | list | `[]` |  |
 | containerPort | int | `80` |  |
 | env | object | `{}` | environment variables passed trough to the pod, will be stored as secret |
 | envFromExternalSecret | object | `{}` | reference multiple environment variables from external secrets |
@@ -58,6 +59,7 @@ docker run --rm -v $(pwd):/app -w/app jnorwood/helm-docs -t helm-docs-template.g
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
+| startupProbe | string | `nil` |  |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------
