@@ -1,6 +1,6 @@
 # basic-web-app
 
-![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 a generic helm chart to run basic web applications in kubernertes
 
@@ -26,6 +26,8 @@ docker run --rm -v $(pwd):/app -w/app jnorwood/helm-docs -t helm-docs-template.g
 | containerPort | int | `80` |  |
 | env | object | `{}` | environment variables passed trough to the pod, will be stored as secret |
 | envFromExternalSecret | object | `{}` | reference multiple environment variables from external secrets |
+| extraVolumeMounts | list | `[]` | define additional volumeMounts |
+| extraVolumes | list | `[]` | define additional volumes |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `""` |  |

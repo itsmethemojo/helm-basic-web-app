@@ -116,3 +116,9 @@ persistentVolumeClaims: []
 #      resources:
 #        requests:
 #          storage: 1Gi
+
+# -- define additional volumes
+extraVolumes: []
+
+# -- define additional volumeMounts
+extraVolumeMounts: []

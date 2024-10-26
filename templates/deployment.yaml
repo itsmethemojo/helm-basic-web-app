@@ -60,12 +60,15 @@ spec:
                   key: {{ .key }}
                   optional: false
             {{- end }}
-          {{- with .Values.persistentVolumeClaims }}
           volumeMounts:
+          {{- with .Values.persistentVolumeClaims }}
             {{- range . }}
             - mountPath: {{ .mountPath }}
               name: {{ include "basic-web-app.fullname" $ }}-{{ .name }}
             {{- end }}
+          {{- end }}
+          {{- with .Values.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
 
       {{- with .Values.nodeSelector }}
@@ -80,11 +83,14 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.persistentVolumeClaims }}
       volumes:
+      {{- with .Values.persistentVolumeClaims }}
         {{- range . }}
         - name: {{ include "basic-web-app.fullname" $ }}-{{ .name }}
           persistentVolumeClaim:
             claimName: {{ include "basic-web-app.fullname" $ }}-{{ .name }}
         {{- end }}
+      {{- end }}
+      {{- with .Values.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
