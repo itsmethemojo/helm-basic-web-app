@@ -31,6 +31,9 @@ readinessProbe:
 
 startupProbe: null
 
+# -- Custom labels to add into metadata
+customLabels: {}
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
